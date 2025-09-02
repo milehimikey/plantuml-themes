@@ -1,0 +1,17 @@
+*.iml
+.idea
+
+
+# Render outputs
+**/_out/
+**/_out/**
+
+# PlantUML caches
+.plantuml/
+.plantuml-cache/
+.plantuml.cache
+plantuml.cache
+.puml-cache/
+.pu-cache/
+.umlcache/
+.uml-cache/

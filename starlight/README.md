@@ -16,6 +16,25 @@ In this repo’s examples (sibling folder):
 !theme starlight from ..
 ```
 
+Remote usage from GitHub (recommended)
+- Latest from main:
+```
+!theme starlight from https://raw.githubusercontent.com/milehimikey/plantuml-themes/main/starlight
+```
+- Pinned to a tag (stable):
+```
+!theme starlight from https://raw.githubusercontent.com/milehimikey/plantuml-themes/v1.0.0/starlight
+```
+- Pinned to a commit:
+```
+!theme starlight from https://raw.githubusercontent.com/milehimikey/plantuml-themes/<commit-sha>/starlight
+```
+
+Fallback for older PlantUML versions (direct include):
+```
+!includeurl https://raw.githubusercontent.com/milehimikey/plantuml-themes/main/starlight/puml-theme-starlight.puml
+```
+
 ## Emphasis helpers
 
 - $emph("<msg>") — blue accent + bold + star icon

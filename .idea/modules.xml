@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/plantuml-themes.iml" filepath="$PROJECT_DIR$/plantuml-themes.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/plantuml-themes.iml" filepath="$PROJECT_DIR$/.idea/plantuml-themes.iml" />
     </modules>
   </component>
 </project>

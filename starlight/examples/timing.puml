@@ -3,10 +3,19 @@
 
 title Timing with Starlight
 
-timing
-  @0
-  Conc ->|> Idle
-  Conc -> Ready : $emph("armed")
-end timing
+concise "Controller" as C
+
+@0
+C is Idle
+
+@10
+C is Ready
+
+@20
+C is Active
+
+@40
+C is Idle
+
 @enduml
 

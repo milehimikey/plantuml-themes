@@ -6,7 +6,7 @@
 
 '' User tunables with safe defaults
 !if %not(%variable_exists("$PUML_BGCOLOR"))
-  !$PUML_BGCOLOR = "transparent"
+  !$PUML_BGCOLOR = "#0E1116"
 !endif
 !if %not(%variable_exists("$PUML_MODE"))
   !$PUML_MODE = "dark"
@@ -18,6 +18,10 @@
 skinparam BackgroundColor $PUML_BGCOLOR
 skinparam useBetaStyle false
 skinparam shadowing false
+
+' Hide circled type icons (C/I/E) in class-like diagrams for better dark-mode contrast
+hide circle
+
 
 '' Core palette (Okabe–Ito derived, dark-friendly)
 !$BG        = "#0E1116"    '' main dark background if not transparent
@@ -43,54 +47,50 @@ skinparam shadowing false
 !$WARNING = $ACC_YELLOW
 !$DANGER  = $ACC_RED
 
-'' Light/dark derivations
-!$SURFACE_LIGHT = %lighten($SURFACE, $PUML_GRADIENT)
-!$SURFACE_DARK  = %darken($SURFACE, $PUML_GRADIENT)
-!$BORDER_LIGHT  = %lighten($BORDER, 12)
-!$PRIMARY_LIGHT = %lighten($PRIMARY, $PUML_GRADIENT)
-!$PRIMARY_DARK  = %darken($PRIMARY, $PUML_GRADIENT)
+'' Light/dark derivations (computed inline to maximize compatibility)
 
 '' Default styles
 skinparam defaultFontName "system-ui, Segoe UI, Roboto, Helvetica, Arial"
 skinparam defaultFontSize 12
 skinparam defaultFontColor $TEXT
 skinparam dpi 100
-skinparam LineColor $BORDER_LIGHT
+skinparam LineColor $PRIMARY
 skinparam ArrowColor $PRIMARY
 skinparam RoundCorner 8
 skinparam Padding 6
 
 skinparam title {
   FontSize 20
-  FontColor $TEXT
-  BackgroundColor $SURFACE
-  BorderColor $BORDER
+  FontColor #E6EDF3
+  BackgroundColor transparent
+  BorderColor #56B4E9
   BorderRoundCorner 8
+  BorderThickness 1
 }
 
 skinparam legend {
   BackgroundColor transparent
-  BorderColor $BORDER
-  FontColor $TEXT
+  BorderColor #334155
+  FontColor #E6EDF3
 }
 
 skinparam note {
-  BackgroundColor $SURFACE
-  BorderColor $BORDER
-  FontColor $TEXT
+  BackgroundColor #111827
+  BorderColor #334155
+  FontColor #E6EDF3
 }
 
 skinparam stereotype {
-  CBackgroundColor $SURFACE_LIGHT
+  CBackgroundColor $SURFACE
   CBorderColor $BORDER
-  ABackgroundColor %lighten($SUCCESS, 10)
-  ABorderColor %darken($SUCCESS, 10)
-  IBackgroundColor %lighten($DANGER, 10)
-  IBorderColor %darken($DANGER, 10)
-  EBackgroundColor %lighten($WARNING, 10)
-  EBorderColor %darken($WARNING, 10)
-  NBackgroundColor %lighten($INFO, 10)
-  NBorderColor %darken($INFO, 10)
+  ABackgroundColor $SUCCESS
+  ABorderColor $SUCCESS
+  IBackgroundColor $DANGER
+  IBorderColor $DANGER
+  EBackgroundColor $WARNING
+  EBorderColor $WARNING
+  NBackgroundColor $INFO
+  NBorderColor $INFO
 }
 
 '' Procedures for accessible emphasis
@@ -110,39 +110,50 @@ skinparam stereotype {
 '' Sequence diagram tuning
 !startsub sequence
 skinparam sequence {
-  TitleFontColor $TEXT
-  BackgroundColor $PUML_BGCOLOR
-  BoxBackgroundColor $SURFACE
-  BoxBorderColor $BORDER
-  BoxFontColor $TEXT
-  GroupBackgroundColor $SURFACE
-  GroupBorderColor $BORDER
-  GroupHeaderBackgroundColor $SURFACE
-  GroupHeaderFontColor $TEXT_MUTE
-  LifeLineBorderColor $BORDER_LIGHT
-  LifeLineBackgroundColor %darken($SURFACE, 6)
+  TitleFontColor #E6EDF3
+  BackgroundColor #0E1116
+  BoxBackgroundColor #111827
+  BoxBorderColor #334155
+  BoxFontColor #E6EDF3
+  GroupBackgroundColor #111827
+  GroupBorderColor #334155
+  GroupHeaderBackgroundColor #111827
+  GroupHeaderFontColor #B6C2CF
+  LifeLineBorderColor #334155
+  LifeLineBackgroundColor #0E1116
   ArrowThickness 2
-  ArrowColor $PRIMARY
-  DividerBackgroundColor $SURFACE
-  DividerBorderColor $BORDER
-  DividerFontColor $TEXT_MUTE
+  ArrowColor #56B4E9
+  DividerBackgroundColor #111827
+  DividerBorderColor #334155
+  DividerFontColor #B6C2CF
+  ReferenceBackgroundColor #111827
+  ReferenceBorderColor #334155
+  ReferenceFontColor #E6EDF3
+  ReferenceHeaderBackgroundColor #111827
+  ReferenceHeaderFontColor #B6C2CF
+  ActorBorderColor #56B4E9
+  ActorFontColor #E6EDF3
+  ParticipantBackgroundColor #111827
+  ParticipantBorderColor #56B4E9
+  ParticipantFontColor #E6EDF3
 }
+
 !endsub
 
 !startsub participant
 skinparam participant {
-  BackgroundColor $SURFACE
-  BorderColor $BORDER
-  FontColor $TEXT
+  BackgroundColor #111827
+  BorderColor #56B4E9
+  FontColor #E6EDF3
   ParticipantBorderThickness 2
 }
 !endsub
 
 !startsub actor
 skinparam actor {
-  BackgroundColor $PUML_BGCOLOR
-  BorderColor $BORDER_LIGHT
-  FontColor $TEXT
+  BackgroundColor transparent
+  BorderColor #56B4E9
+  FontColor #56B4E9
 }
 !endsub
 
@@ -157,9 +168,9 @@ skinparam arrow {
 '' Use Case
 !startsub usecase
 skinparam usecase {
-  BackgroundColor $SURFACE
-  BorderColor $BORDER
-  FontColor $TEXT
+  BackgroundColor #111827
+  BorderColor #56B4E9
+  FontColor #E6EDF3
   BorderThickness 2
 }
 !endsub
@@ -167,116 +178,139 @@ skinparam usecase {
 '' Class
 !startsub class
 skinparam class {
-  BackgroundColor $SURFACE
-  HeaderBackgroundColor $PRIMARY_LIGHT-$SURFACE
-  BorderColor $BORDER
-  FontColor $TEXT
-  AttributeFontColor $TEXT
-  StereotypeFontColor $TEXT_MUTE
+  BackgroundColor #111827
+  HeaderBackgroundColor #56B4E9-#111827
+  BorderColor #334155
+  FontColor #E6EDF3
+  AttributeFontColor #E6EDF3
+  StereotypeFontColor #B6C2CF
+  ClassAttributeIconSize 0
 }
 !endsub
 
 '' Activity
 !startsub activity
 skinparam activity {
-  BackgroundColor $SURFACE
-  BorderColor $BORDER
-  FontColor $TEXT
-  BarColor $PRIMARY
-  StartColor $PRIMARY
-  EndColor $PRIMARY
-  DiamondBackgroundColor $SURFACE
-  DiamondBorderColor $BORDER
-  DiamondFontColor $TEXT
+  BackgroundColor #111827
+  BorderColor #334155
+  FontColor #E6EDF3
+  BarColor #56B4E9
+  StartColor #56B4E9
+  EndColor #56B4E9
+  DiamondBackgroundColor #111827
+  DiamondBorderColor #334155
+  DiamondFontColor #E6EDF3
+  ActivityStartColor #56B4E9
+  ActivityEndColor #56B4E9
+  ActivityBackgroundColor #111827
 }
 !endsub
 
 '' Component
 !startsub component
 skinparam component {
-  BackgroundColor $SURFACE
-  BorderColor $BORDER
-  FontColor $TEXT
+  BackgroundColor #111827
+  BorderColor #56B4E9
+  FontColor #E6EDF3
 }
 !endsub
 
 '' State
 !startsub state
 skinparam state {
-  BackgroundColor $SURFACE
-  BorderColor $BORDER
-  FontColor $TEXT
-  StartColor $PRIMARY
-  EndColor $PRIMARY
+  BackgroundColor #111827
+  BorderColor #334155
+  FontColor #E6EDF3
+  StartColor #56B4E9
+  EndColor #56B4E9
 }
 !endsub
 
 '' Object
 !startsub object
 skinparam object {
-  BackgroundColor $SURFACE
-  BorderColor $BORDER
-  FontColor $TEXT
-  AttributeFontColor $TEXT
+  BackgroundColor #111827
+  BorderColor #334155
+  FontColor #E6EDF3
+  AttributeFontColor #E6EDF3
 }
 !endsub
 
 '' Deployment
 !startsub node
 skinparam node {
-  BackgroundColor $SURFACE
-  BorderColor $BORDER
-  FontColor $TEXT
+  BackgroundColor #111827
+  BorderColor #334155
+  FontColor #E6EDF3
 }
 !endsub
 
 !startsub database
 skinparam database {
-  BackgroundColor $SURFACE
-  BorderColor $BORDER
-  FontColor $TEXT
+  BackgroundColor #111827
+  BorderColor #334155
+  FontColor #E6EDF3
 }
 !endsub
 
 !startsub artifact
 skinparam artifact {
-  BackgroundColor $SURFACE
-  BorderColor $BORDER
-  FontColor $TEXT
+  BackgroundColor #111827
+  BorderColor #334155
+  FontColor #E6EDF3
 }
 !endsub
 
 '' Timing
 !startsub timing
 skinparam timing {
-  BackgroundColor $PUML_BGCOLOR
-  LineColor $PRIMARY
-  FontColor $TEXT
+  BackgroundColor #0E1116
+  LineColor #56B4E9
+  FontColor #E6EDF3
+  SeparatorColor #334155
+  TimeFontColor #B6C2CF
 }
 !endsub
+
+<style>
+timingDiagram {
+  state {
+    BackGroundColor #0E1116
+    LineColor #334155
+    FontColor #E6EDF3
+  }
+  concise {
+    BackGroundColor #0E1116
+    LineColor #334155
+    FontColor #E6EDF3
+  }
+  scale { FontColor #B6C2CF }
+  timeHeader { FontColor #B6C2CF }
+}
+</style>
 
 '' Frames, packages, etc.
 !startsub package
 skinparam package {
-  BackgroundColor $PUML_BGCOLOR
-  BorderColor $BORDER
-  FontColor $TEXT_MUTE
+  BackgroundColor #0E1116
+  BorderColor #56B4E9
+  FontColor #B6C2CF
 }
 !endsub
 
 !startsub frame
 skinparam frame {
-  BackgroundColor $SURFACE
-  BorderColor $BORDER
-  FontColor $TEXT
+  BackgroundColor #111827
+  BorderColor #56B4E9
+  FontColor #E6EDF3
 }
 !endsub
 
 !startsub rectangle
 skinparam rectangle {
-  BackgroundColor $SURFACE
-  BorderColor $BORDER
-  FontColor $TEXT
+  BackgroundColor #111827
+  BorderColor #56B4E9
+  FontColor #E6EDF3
 }
 !endsub
 
