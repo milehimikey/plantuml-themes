@@ -33,7 +33,14 @@ Steps and checks for adding a new theme.
   - Arrow visibility and lifelines (sequence)
   - Legibility with color-blind simulators (optional but recommended)
 
-## 5) Git hygiene
+## 5) Conventional Commits and releases
+
+- Use Conventional Commit titles on PRs; with squash merge the PR title becomes the commit analyzed by release automation
+  - `feat(scope): ...` → minor, `fix(scope): ...` → patch, `type(scope)!: ...` + BREAKING CHANGE footer → major
+- Do not tag releases manually; GitHub Action (release-please) opens a release PR on push to `main` when there are release-worthy commits
+- To force a release (docs/chore only), add a commit footer: `Release-As: X.Y.Z`
+
+## 6) Git hygiene
 
 - Do not commit outputs in `_out/`
 - Keep `.gitignore` entries for PlantUML caches
