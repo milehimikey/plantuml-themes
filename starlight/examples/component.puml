@@ -1,0 +1,13 @@
+@startuml
+!theme starlight from ..
+
+title Component with Starlight
+
+component Frontend
+component Backend
+database DB
+
+Frontend --> Backend : REST $emph("/login")
+Backend --> DB : SQL
+@enduml
+

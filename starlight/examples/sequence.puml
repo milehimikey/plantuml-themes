@@ -1,0 +1,15 @@
+@startuml
+!theme starlight from ..
+
+title Sequence with Starlight
+
+actor User
+participant API
+participant DB
+
+User -> API : login(username, password)
+API -> DB : SELECT user
+DB --> API : $success("found")
+API --> User : $emph("★ Welcome back")
+@enduml
+

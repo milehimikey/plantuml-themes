@@ -1,0 +1,10 @@
+@startuml
+!theme starlight from ..
+
+title State with Starlight
+
+[*] --> Idle
+Idle --> Active : $emph("start")
+Active --> [*] : $warning("timeout")
+@enduml
+

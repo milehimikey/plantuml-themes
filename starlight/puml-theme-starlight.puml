@@ -1,0 +1,289 @@
+''
+'' Starlight Theme - Dark, color-blind–friendly
+''
+!$PUML_THEME = "starlight"
+!$THEME      = "starlight"
+
+'' User tunables with safe defaults
+!if %not(%variable_exists("$PUML_BGCOLOR"))
+  !$PUML_BGCOLOR = "transparent"
+!endif
+!if %not(%variable_exists("$PUML_MODE"))
+  !$PUML_MODE = "dark"
+!endif
+!if %not(%variable_exists("$PUML_GRADIENT"))
+  !$PUML_GRADIENT = 18
+!endif
+
+skinparam BackgroundColor $PUML_BGCOLOR
+skinparam useBetaStyle false
+skinparam shadowing false
+
+'' Core palette (Okabe–Ito derived, dark-friendly)
+!$BG        = "#0E1116"    '' main dark background if not transparent
+!$SURFACE   = "#111827"    '' panels/cards
+!$BORDER    = "#334155"    '' neutral border
+!$TEXT      = "#E6EDF3"    '' primary text
+!$TEXT_MUTE = "#B6C2CF"    '' secondary text
+
+'' Accents (CVD-safe)
+!$ACC_BLUE   = "#56B4E9"
+!$ACC_ORANGE = "#E69F00"
+!$ACC_GREEN  = "#009E73"
+!$ACC_YELLOW = "#F0E442"
+!$ACC_RED    = "#D55E00"
+!$ACC_PURPLE = "#CC79A7"
+!$ACC_GRAY   = "#999999"
+!$ACC_CYAN   = "#00BFC4"
+
+'' Semantic mappings
+!$PRIMARY = $ACC_BLUE
+!$INFO    = $ACC_CYAN
+!$SUCCESS = $ACC_GREEN
+!$WARNING = $ACC_YELLOW
+!$DANGER  = $ACC_RED
+
+'' Light/dark derivations
+!$SURFACE_LIGHT = %lighten($SURFACE, $PUML_GRADIENT)
+!$SURFACE_DARK  = %darken($SURFACE, $PUML_GRADIENT)
+!$BORDER_LIGHT  = %lighten($BORDER, 12)
+!$PRIMARY_LIGHT = %lighten($PRIMARY, $PUML_GRADIENT)
+!$PRIMARY_DARK  = %darken($PRIMARY, $PUML_GRADIENT)
+
+'' Default styles
+skinparam defaultFontName "system-ui, Segoe UI, Roboto, Helvetica, Arial"
+skinparam defaultFontSize 12
+skinparam defaultFontColor $TEXT
+skinparam dpi 100
+skinparam LineColor $BORDER_LIGHT
+skinparam ArrowColor $PRIMARY
+skinparam RoundCorner 8
+skinparam Padding 6
+
+skinparam title {
+  FontSize 20
+  FontColor $TEXT
+  BackgroundColor $SURFACE
+  BorderColor $BORDER
+  BorderRoundCorner 8
+}
+
+skinparam legend {
+  BackgroundColor transparent
+  BorderColor $BORDER
+  FontColor $TEXT
+}
+
+skinparam note {
+  BackgroundColor $SURFACE
+  BorderColor $BORDER
+  FontColor $TEXT
+}
+
+skinparam stereotype {
+  CBackgroundColor $SURFACE_LIGHT
+  CBorderColor $BORDER
+  ABackgroundColor %lighten($SUCCESS, 10)
+  ABorderColor %darken($SUCCESS, 10)
+  IBackgroundColor %lighten($DANGER, 10)
+  IBorderColor %darken($DANGER, 10)
+  EBackgroundColor %lighten($WARNING, 10)
+  EBorderColor %darken($WARNING, 10)
+  NBackgroundColor %lighten($INFO, 10)
+  NBorderColor %darken($INFO, 10)
+}
+
+'' Procedures for accessible emphasis
+!procedure $success($msg)
+  <font color=$SUCCESS><b>$msg
+!endprocedure
+!procedure $failure($msg)
+  <font color=$DANGER><b>$msg
+!endprocedure
+!procedure $warning($msg)
+  <font color=$WARNING><b>$msg
+!endprocedure
+!procedure $emph($msg)
+  <font color=$PRIMARY><b>★ $msg
+!endprocedure
+
+'' Sequence diagram tuning
+!startsub sequence
+skinparam sequence {
+  TitleFontColor $TEXT
+  BackgroundColor $PUML_BGCOLOR
+  BoxBackgroundColor $SURFACE
+  BoxBorderColor $BORDER
+  BoxFontColor $TEXT
+  GroupBackgroundColor $SURFACE
+  GroupBorderColor $BORDER
+  GroupHeaderBackgroundColor $SURFACE
+  GroupHeaderFontColor $TEXT_MUTE
+  LifeLineBorderColor $BORDER_LIGHT
+  LifeLineBackgroundColor %darken($SURFACE, 6)
+  ArrowThickness 2
+  ArrowColor $PRIMARY
+  DividerBackgroundColor $SURFACE
+  DividerBorderColor $BORDER
+  DividerFontColor $TEXT_MUTE
+}
+!endsub
+
+!startsub participant
+skinparam participant {
+  BackgroundColor $SURFACE
+  BorderColor $BORDER
+  FontColor $TEXT
+  ParticipantBorderThickness 2
+}
+!endsub
+
+!startsub actor
+skinparam actor {
+  BackgroundColor $PUML_BGCOLOR
+  BorderColor $BORDER_LIGHT
+  FontColor $TEXT
+}
+!endsub
+
+!startsub arrow
+skinparam arrow {
+  Thickness 2
+  Color $PRIMARY
+  FontColor $TEXT
+}
+!endsub
+
+'' Use Case
+!startsub usecase
+skinparam usecase {
+  BackgroundColor $SURFACE
+  BorderColor $BORDER
+  FontColor $TEXT
+  BorderThickness 2
+}
+!endsub
+
+'' Class
+!startsub class
+skinparam class {
+  BackgroundColor $SURFACE
+  HeaderBackgroundColor $PRIMARY_LIGHT-$SURFACE
+  BorderColor $BORDER
+  FontColor $TEXT
+  AttributeFontColor $TEXT
+  StereotypeFontColor $TEXT_MUTE
+}
+!endsub
+
+'' Activity
+!startsub activity
+skinparam activity {
+  BackgroundColor $SURFACE
+  BorderColor $BORDER
+  FontColor $TEXT
+  BarColor $PRIMARY
+  StartColor $PRIMARY
+  EndColor $PRIMARY
+  DiamondBackgroundColor $SURFACE
+  DiamondBorderColor $BORDER
+  DiamondFontColor $TEXT
+}
+!endsub
+
+'' Component
+!startsub component
+skinparam component {
+  BackgroundColor $SURFACE
+  BorderColor $BORDER
+  FontColor $TEXT
+}
+!endsub
+
+'' State
+!startsub state
+skinparam state {
+  BackgroundColor $SURFACE
+  BorderColor $BORDER
+  FontColor $TEXT
+  StartColor $PRIMARY
+  EndColor $PRIMARY
+}
+!endsub
+
+'' Object
+!startsub object
+skinparam object {
+  BackgroundColor $SURFACE
+  BorderColor $BORDER
+  FontColor $TEXT
+  AttributeFontColor $TEXT
+}
+!endsub
+
+'' Deployment
+!startsub node
+skinparam node {
+  BackgroundColor $SURFACE
+  BorderColor $BORDER
+  FontColor $TEXT
+}
+!endsub
+
+!startsub database
+skinparam database {
+  BackgroundColor $SURFACE
+  BorderColor $BORDER
+  FontColor $TEXT
+}
+!endsub
+
+!startsub artifact
+skinparam artifact {
+  BackgroundColor $SURFACE
+  BorderColor $BORDER
+  FontColor $TEXT
+}
+!endsub
+
+'' Timing
+!startsub timing
+skinparam timing {
+  BackgroundColor $PUML_BGCOLOR
+  LineColor $PRIMARY
+  FontColor $TEXT
+}
+!endsub
+
+'' Frames, packages, etc.
+!startsub package
+skinparam package {
+  BackgroundColor $PUML_BGCOLOR
+  BorderColor $BORDER
+  FontColor $TEXT_MUTE
+}
+!endsub
+
+!startsub frame
+skinparam frame {
+  BackgroundColor $SURFACE
+  BorderColor $BORDER
+  FontColor $TEXT
+}
+!endsub
+
+!startsub rectangle
+skinparam rectangle {
+  BackgroundColor $SURFACE
+  BorderColor $BORDER
+  FontColor $TEXT
+}
+!endsub
+
+'' If background is transparent, assume dark (works with dark editors)
+!if ($PUML_MODE == "dark")
+  !assume transparent dark
+!else
+  !assume transparent light
+!endif
+

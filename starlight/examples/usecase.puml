@@ -1,0 +1,14 @@
+@startuml
+!theme starlight from ..
+
+title Use Case with Starlight
+
+actor Customer
+rectangle Shop {
+  usecase "Browse Catalog" as UC1
+  usecase "Checkout" as UC2
+}
+Customer --> UC1 : $emph("primary")
+Customer --> UC2 : $warning("requires login")
+@enduml
+

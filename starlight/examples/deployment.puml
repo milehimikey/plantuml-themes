@@ -1,0 +1,13 @@
+@startuml
+!theme starlight from ..
+
+title Deployment with Starlight
+
+node "Web Server" as Web
+node "App Server" as App
+node "DB Server" as Db
+
+Web --> App : HTTP $emph("TLS")
+App --> Db : JDBC
+@enduml
+

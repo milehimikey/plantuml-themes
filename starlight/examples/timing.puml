@@ -1,0 +1,12 @@
+@startuml
+!theme starlight from ..
+
+title Timing with Starlight
+
+timing
+  @0
+  Conc ->|> Idle
+  Conc -> Ready : $emph("armed")
+end timing
+@enduml
+

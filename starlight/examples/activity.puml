@@ -1,0 +1,15 @@
+@startuml
+!theme starlight from ..
+
+title Activity with Starlight
+
+start
+:Enter credentials;
+if (Valid?) then (yes)
+  :$emph("Proceed");
+else (no)
+  :$failure("Reject");
+endif
+stop
+@enduml
+

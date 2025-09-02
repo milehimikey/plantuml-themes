@@ -1,0 +1,15 @@
+@startuml
+!theme starlight from ..
+
+title Object with Starlight
+
+object cart {
+  items = 3
+  total = "$42"
+}
+object user {
+  name = "Alice"
+}
+cart --> user : $emph("belongs to")
+@enduml
+

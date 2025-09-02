@@ -1,0 +1,15 @@
+@startuml
+!theme starlight from ..
+
+title Class with Starlight
+
+class Order {
+  +id: UUID
+  +total(): Money
+}
+class LineItem {
+  +qty: int
+}
+Order "1" -- "*" LineItem : $emph("contains")
+@enduml
+
